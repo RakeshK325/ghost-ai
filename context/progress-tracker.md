@@ -31,10 +31,17 @@ Update this file whenever the current phase, active feature, or implementation s
   - `<UserButton />` added to editor navbar right section
   - `afterSignOutUrl="/sign-in"` configured at ClerkProvider level
   - `npm run build` passes with zero errors
+- Implemented `/editor` home screen and dynamic mock project canvas toggling (initialized empty without demo data).
+- Added project dialog state, form validation, and URL slug generation using a dedicated custom hook (`useProjectDialogs`).
+- Added Create Project, Rename Project (prefilled, autofocus, Enter-submitting), and Delete Project (destructive confirm) dialog interfaces (without Workspace URL preview elements).
+- Extended project list sidebar to group items by My Projects (owned) and Shared (collaborators).
+- Displayed action buttons (Rename/Delete) strictly on owned projects and hid them for shared projects.
+- Integrated a responsive backdrop scrim overlay to automatically dismiss the sidebar on mobile clicks.
+- Resolved ESLint warnings in standard primitives (input, textarea) and achieved a fully passing standard build with zero compilation or lint errors.
 
 ## In Progress
 
-- None (Authentication and Route Protection completed)
+- None (Project Dialogs and Sidebar Actions completed)
 
 ## Next Up
 

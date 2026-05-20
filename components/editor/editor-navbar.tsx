@@ -8,11 +8,13 @@ import { UserButton } from "@clerk/nextjs";
 interface EditorNavbarProps {
   isSidebarOpen: boolean;
   onToggleSidebar: () => void;
+  activeProjectName?: string;
 }
 
 export function EditorNavbar({
   isSidebarOpen,
   onToggleSidebar,
+  activeProjectName,
 }: EditorNavbarProps) {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex h-14 w-full items-center justify-between border-b border-border-default bg-bg-surface/80 px-4 backdrop-blur-md transition-all duration-300">
@@ -47,7 +49,7 @@ export function EditorNavbar({
       <div className="hidden sm:flex items-center gap-2">
         <span className="text-xs font-medium text-text-muted">Canvas:</span>
         <span className="text-xs font-semibold text-text-primary bg-bg-elevated/40 border border-border-default/30 px-2.5 py-1 rounded-md">
-          System Architecture Design
+          {activeProjectName || "System Architecture Design"}
         </span>
       </div>
 
