@@ -38,10 +38,13 @@ Update this file whenever the current phase, active feature, or implementation s
 - Displayed action buttons (Rename/Delete) strictly on owned projects and hid them for shared projects.
 - Integrated a responsive backdrop scrim overlay to automatically dismiss the sidebar on mobile clicks.
 - Resolved ESLint warnings in standard primitives (input, textarea) and achieved a fully passing standard build with zero compilation or lint errors.
+- Added database schema models `Project` and `ProjectCollaborator` supporting cascade deletions, precise status states (`DRAFT`, `ARCHIVED`), and composite unique constraints and indexes for query optimizations.
+- Configured cached Prisma Client singleton supporting database driver branching between direct TCP pg pool adapter (`@prisma/adapter-pg`) and serverless cloud Accelerate extension, safely cached in HMR environments.
+- Created and executed the database initializer migration (`20260520155452_init`) syncing standard relational tables on PostgreSQL.
 
 ## In Progress
 
-- None (Project Dialogs and Sidebar Actions completed)
+- None
 
 ## Next Up
 
