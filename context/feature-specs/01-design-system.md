@@ -7,7 +7,7 @@ Install and configure `shadcn/ui`.
 Add these shadcn components:
 - Button
 - Card
-- Dailog
+- Dialog
 - Input
 - Tabs
 - Textarea 

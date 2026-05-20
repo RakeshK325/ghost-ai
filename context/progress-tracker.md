@@ -21,10 +21,20 @@ Update this file whenever the current phase, active feature, or implementation s
 - Refined Tailwind `@theme` in `app/globals.css` with `--color-brand` mapping to support `ring-brand` and `border-brand` styling utilities across all UI primitives
 - Cleaned up Next.js boilerplate: stripped `globals.css` down to core Tailwind directives and replaced `page.tsx` with a minimal centered "ghost AI" component
 - Implemented base editor layout shell (`EditorNavbar` and floating `ProjectSidebar`) and verified the dialog styling pattern via a live stateful workspace canvas page
+- Wired Clerk authentication into the app:
+  - `ClerkProvider` wraps `app/layout.tsx` with `dark` base theme from `@clerk/ui/themes`
+  - Clerk appearance overrides applied using CSS custom properties — no hardcoded colors
+  - Created `proxy.ts` at root for route protection (protected-first strategy)
+  - Public routes: `/sign-in` and `/sign-up`; all other routes are protected
+  - Root path `/` redirects authenticated users to `/editor` and unauthenticated to `/sign-in`
+  - Custom two-panel sign-in and sign-up pages created with responsive layout
+  - `<UserButton />` added to editor navbar right section
+  - `afterSignOutUrl="/sign-in"` configured at ClerkProvider level
+  - `npm run build` passes with zero errors
 
 ## In Progress
 
-- None (Editor Chrome Foundation completed)
+- None (Authentication and Route Protection completed)
 
 ## Next Up
 
