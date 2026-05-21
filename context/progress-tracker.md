@@ -41,6 +41,13 @@ Update this file whenever the current phase, active feature, or implementation s
 - Added database schema models `Project` and `ProjectCollaborator` supporting cascade deletions, precise status states (`DRAFT`, `ARCHIVED`), and composite unique constraints and indexes for query optimizations.
 - Configured cached Prisma Client singleton supporting database driver branching between direct TCP pg pool adapter (`@prisma/adapter-pg`) and serverless cloud Accelerate extension, safely cached in HMR environments.
 - Created and executed the database initializer migration (`20260520155452_init`) syncing standard relational tables on PostgreSQL.
+- Implemented backend-only REST API endpoints for projects: list (`GET /api/projects`), create (`POST /api/projects`), rename (`PATCH /api/projects/[projectId]`), and delete (`DELETE /api/projects/[projectId]`) with Clerk authentication and ownership-checking database level security.
+- Connected the editor home sidebar, workspace views, and project dialogs to the real database and backend REST APIs:
+  - Created `lib/projects.ts` data helper to fetch projects and generate slugs server-side.
+  - Converted the editor home page `app/editor/page.tsx` from a Client Component to a Server Component with server-side initial loading.
+  - Extracted all canvas state and dialog elements into a client interactive component `app/editor/editor-client.tsx`.
+  - Created a custom `useProjectActions` hook in `hooks/use-project-actions.ts` that handles async creation, renaming, and deletion, generates short 4-character suffixes to keep the project ID and Liveblocks room ID aligned, and manages loading/form UI states.
+  - Wired workspace URL query-routing (`/editor?projectId=<id>`) for instant server-side updates and smooth navigations.
 
 ## In Progress
 
