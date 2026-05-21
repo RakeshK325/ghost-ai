@@ -46,6 +46,7 @@ import { UserButton } from "@clerk/nextjs";
 import { useProjectActions } from "@/hooks/use-project-actions";
 import { Project } from "@/types/project";
 import { cn } from "@/lib/utils";
+import { CanvasWrapper } from "@/components/editor/canvas-wrapper";
 
 interface WorkspaceClientProps {
   initialProjects: Project[];
@@ -349,60 +350,16 @@ export function WorkspaceClient({
       <main className="absolute inset-0 pt-14 bg-bg-base flex transition-all duration-300">
         
         {/* Canvas Area Container */}
-        <div className="flex-1 h-full relative overflow-hidden bg-bg-base bg-[radial-gradient(rgba(42,42,48,0.45)_1px,transparent_1px)] [background-size:24px_24px] flex items-center justify-center p-6 text-center select-none z-10 transition-all duration-300">
-          
-          {/* Decorative glowing center radial layout */}
-          <div className="absolute top-[45%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand/5 blur-[120px] rounded-full pointer-events-none" />
-
-          {/* Canvas empty state wrapper */}
-          <div className="relative flex flex-col items-center max-w-lg mx-auto">
-            {/* Glowing lock/workflow badge */}
-            <div className="relative mb-6 flex h-16 w-16 items-center justify-center rounded-3xl border border-border-default bg-bg-surface/90 text-brand shadow-[0_8px_32px_rgba(0,0,0,0.5)] drop-shadow-[0_0_15px_rgba(0,200,212,0.12)]">
-              <Workflow className="h-8 w-8 text-brand" />
-            </div>
-
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-state-success/20 bg-state-success/5 text-[10px] font-bold tracking-wider text-state-success uppercase mb-4 shadow-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-state-success animate-ping" />
-              <span>Canvas Sync Ready</span>
-            </div>
-
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-text-primary mb-3 bg-gradient-to-b from-text-primary to-text-secondary bg-clip-text">
-              {activeProject.name}
-            </h1>
-            
-            <p className="text-xs sm:text-sm text-text-secondary max-w-sm mb-6 leading-relaxed">
-              Collaborative canvas room initialized for <span className="font-semibold text-brand">Liveblocks</span> room session. Canvas graph node structure will load here.
-            </p>
-
-            <div className="p-4 border border-border-default/60 bg-bg-surface/40 backdrop-blur-md rounded-2xl max-w-md w-full text-left space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-text-secondary flex items-center gap-1.5">
-                <Zap className="h-3.5 w-3.5 text-brand" />
-                <span>Next steps:</span>
-              </h4>
-              <ul className="text-[11px] text-text-muted space-y-2 list-none pl-0">
-                <li className="flex items-start gap-2">
-                  <span className="text-brand shrink-0">→</span>
-                  <span>Open the <strong className="text-text-secondary">AI Copilot</strong> panel on the right.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brand shrink-0">→</span>
-                  <span>Ask the AI to draft a microservice stack or API gateway.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brand shrink-0">→</span>
-                  <span>Once nodes are created, compile technical specs automatically.</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Floating Canvas HUD (Bottom-Center HUD overlay) */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 bg-bg-surface/90 backdrop-blur-md border border-border-default rounded-xl p-1.5 shadow-lg">
-            <span className="text-[10px] font-mono text-text-faint px-2">CANVAS HUD MOCK</span>
-            <div className="h-4 w-[1px] bg-border-default/60" />
-            <Button variant="ghost" size="icon" className="h-7 w-7 rounded-lg text-text-muted cursor-not-allowed"><Grid3X3 className="h-3.5 w-3.5" /></Button>
-            <Button variant="ghost" size="icon" className="h-7 w-7 rounded-lg text-text-muted cursor-not-allowed"><Minimize2 className="h-3.5 w-3.5" /></Button>
-            <Button variant="ghost" size="icon" className="h-7 w-7 rounded-lg text-text-muted cursor-not-allowed"><Maximize2 className="h-3.5 w-3.5" /></Button>
+        <div 
+          className={cn(
+            "flex-1 relative transition-all duration-300 ease-in-out my-4 p-1 border border-border-default/40 bg-bg-surface/20 rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.5)] z-10",
+            sidebarOpen ? "ml-[22rem]" : "ml-4",
+            aiBarOpen ? "mr-[22rem] sm:mr-[24.5rem]" : "mr-4"
+          )}
+          style={{ height: "calc(100% - 2rem)" }}
+        >
+          <div className="w-full h-full border border-border-default bg-bg-base rounded-[1.375rem] overflow-hidden relative">
+            <CanvasWrapper projectId={activeProject.id} />
           </div>
         </div>
 

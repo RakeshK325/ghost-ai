@@ -64,14 +64,37 @@ Update this file whenever the current phase, active feature, or implementation s
   - Formatted the workspace link element as a high-fidelity read-only `<Input>` component, locking Invite and Link sections to perfectly symmetrical `h-10` heights and corners.
   - Added subtle horizontal dividers (`border-b` and `border-t`) to frame the dialog contents symmetrically with elegant breathing space.
   - Fixed horizontal and vertical boundary overflows, ensuring the modal content respects container limits with a premium, spacious card aesthetic.
+- Configured and set up the core real-time collaboration infrastructure using Liveblocks:
+  - Installed and configured `@liveblocks/node` dependency to enable backend token signing and room management.
+  - Configured `liveblocks.config.ts` globally with custom `Presence` (`cursor` coordinates, `isThinking` indicator) and `UserMeta` (`id`, `info` with `name`, `avatar`, and deterministic `color`).
+  - Created a cached, HMR-safe `lib/liveblocks.ts` node server client and a deterministic cursor color generator using an HSL-tailored 8-color palette.
+  - Implemented secure authentication endpoint `POST /api/liveblocks-auth` with Clerk protection, database project collaborator access validation, automated private-room provisioning, and session token generation using the dynamic Access Token session model.
+  - Resolved all typescript and linter compilation warnings/errors and achieved a 100% clean production next build compile.
+- Fully implemented Liveblocks-backed React Flow collaborative canvas inside the editor workspace:
+  - Defined shared canvas types, shape categories, and vibrant HSL-tailored node/text color pairs in `types/canvas.ts`.
+  - Built class-based `<ErrorBoundary>` capturing collaborative session and room authorization failures.
+  - Implemented `<CollaborativeFlow>` wiring React Flow state and handlers directly into Liveblocks multiplayer context with `connectionMode="loose"`.
+  - Integrated `Cursors`, `Background` (dot pattern), and styled custom dark `MiniMap` widgets.
+  - Created `<CanvasWrapper>` container setting up the Liveblocks session and RoomProvider.
+  - Replaced the static, empty canvas dashboard placeholder in `WorkspaceClient` with the new synced `<CanvasWrapper>`.
+- Implemented premium responsive dual-pane double-bordered canvas container and aligned MiniMap:
+  - Hid standard gray React Flow watermark using `proOptions={{ hideAttribution: true }}` in `CollaborativeFlow`.
+  - Aligned React Flow `<MiniMap>` widget to the `"bottom-right"` corner.
+  - Upgraded the central canvas wrapper in `WorkspaceClient` to a responsive, double-bordered card container featuring transition animations.
+  - Set margins (`ml` / `mr`) to adjust dynamically on sidebarOpen and aiBarOpen states, preventing the sidebars from obscuring the MiniMap and keeping the canvas beautifully nested.
+- Fully implemented bottom shape panel toolbar and custom canvas node rendering (spec 12):
+  - Created a floating pill-shaped toolbar component with draggable buttons for all 6 shapes.
+  - Implemented client-side ReactFlowProvider layout wrapping.
+  - Built custom `canvasNode` custom renderer supporting coordinate translation and interactive handles on all 4 sides.
+  - Handled automated drop mechanics with screen-to-flow coordinate translations.
 
 ## In Progress
 
-- None
+- Complete full high-fidelity custom SVG graphics rendering for each system architecture node shape (diamonds, hexagons, cylinders, circles, pills, rectangles) inside the custom renderer.
 
 ## Next Up
 
-- Set up shared real-time collaborative canvas using Liveblocks and React Flow as defined in project scope.
+- Support node text editing and color selection controls.
 
 ## Open Questions
 
