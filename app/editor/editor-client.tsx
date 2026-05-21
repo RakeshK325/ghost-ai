@@ -66,7 +66,7 @@ export function EditorClient({ initialProjects, activeProjectId }: EditorClientP
 
   const handleSelectProject = (id: string | null) => {
     if (id) {
-      router.push(`/editor?projectId=${id}`);
+      router.push(`/editor/${id}`);
     } else {
       router.push("/editor");
     }

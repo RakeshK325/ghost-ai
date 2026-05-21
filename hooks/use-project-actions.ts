@@ -89,7 +89,7 @@ export function useProjectActions({ activeProjectId = null }: UseProjectActionsP
         const newProject = await response.json();
         closeDialog();
         // Navigate to the new workspace URL
-        router.push(`/editor?projectId=${newProject.id}`);
+        router.push(`/editor/${newProject.id}`);
       } catch (error) {
         console.error("Failed to create project:", error);
       } finally {
